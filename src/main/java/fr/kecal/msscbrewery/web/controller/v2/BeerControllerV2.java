@@ -1,7 +1,7 @@
-package fr.kecal.msscbrewery.web.controller;
+package fr.kecal.msscbrewery.web.controller.v2;
 
-import fr.kecal.msscbrewery.web.model.BeerDto;
-import fr.kecal.msscbrewery.web.service.BeerService;
+import fr.kecal.msscbrewery.web.model.v2.BeerDtoV2;
+import fr.kecal.msscbrewery.web.service.v2.BeerServiceV2;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -17,21 +17,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-@Deprecated
-@RequestMapping("/api/v1/beers")
+@RequestMapping("/api/v2/beers")
 @RestController
 @RequiredArgsConstructor
-public class BeerController {
-    private final BeerService beerService;
+public class BeerControllerV2 {
+    private final BeerServiceV2 beerService;
 
     @GetMapping("/{beerId}")
-    public ResponseEntity<BeerDto> getBeer(@PathVariable UUID beerId) {
+    public ResponseEntity<BeerDtoV2> getBeer(@PathVariable UUID beerId) {
         return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity createNewBeer(@RequestBody BeerDto beerDto) {
-        BeerDto savedBeerDto = beerService.saveNewBeer(beerDto);
+    public ResponseEntity createNewBeer(@RequestBody BeerDtoV2 beerDto) {
+        BeerDtoV2 savedBeerDto = beerService.saveNewBeer(beerDto);
 
         HttpHeaders headers = new HttpHeaders();
         //TODO: add hostname to the url
@@ -42,7 +41,7 @@ public class BeerController {
 
     @PutMapping("/{beerId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updateBeer(@PathVariable UUID beerId, @RequestBody BeerDto beerDto) {
+    public void updateBeer(@PathVariable UUID beerId, @RequestBody BeerDtoV2 beerDto) {
         beerService.updateBeer(beerId, beerDto);
     }
 
