@@ -1,5 +1,6 @@
 package fr.kecal.msscbrewery.web.controller;
 
+import fr.kecal.msscbrewery.web.model.BeerDto;
 import fr.kecal.msscbrewery.web.model.CustomerDto;
 import fr.kecal.msscbrewery.web.service.CustomerService;
 import java.util.UUID;
